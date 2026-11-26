@@ -5,7 +5,7 @@ A tiny command-line to-do manager written in Python. No dependencies, tasks are 
 ## Install
 
 ```bash
-git clone https://github.com/USERNAME/todo-cli.git
+git clone https://github.com/shmhesam/todo-cli.git
 cd todo-cli
 pip install -e .
 ```
