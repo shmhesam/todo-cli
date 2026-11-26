@@ -78,3 +78,16 @@ def test_cli_end_to_end(capsys):
 def test_cli_error_exit_code(capsys):
     assert cli.main(["done", "42"]) == 1
     assert "Error" in capsys.readouterr().err
+
+
+def test_edit_task():
+    tasks = []
+    core.add_task(tasks, "old")
+    assert core.edit_task(tasks, 1, "  new  ")["title"] == "new"
+
+
+def test_edit_rejects_empty_title():
+    tasks = []
+    core.add_task(tasks, "old")
+    with pytest.raises(ValueError):
+        core.edit_task(tasks, 1, " ")

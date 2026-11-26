@@ -49,3 +49,12 @@ def filter_tasks(tasks: list[dict], show: str = "all") -> list[dict]:
     if show == "pending":
         return [t for t in tasks if not t["done"]]
     return list(tasks)
+
+
+def edit_task(tasks: list[dict], task_id: int, new_title: str) -> dict:
+    new_title = new_title.strip()
+    if not new_title:
+        raise ValueError("Task title cannot be empty.")
+    task = find_task(tasks, task_id)
+    task["title"] = new_title
+    return task

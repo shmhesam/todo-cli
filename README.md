@@ -21,6 +21,7 @@ todo list --pending        # only pending tasks
 todo list --done           # only completed tasks
 todo done 1                # mark task #1 as done
 todo undo 1                # mark task #1 as not done
+todo edit 1 New title      # change the title of task #1
 todo remove 1              # delete task #1
 todo clear                 # delete all completed tasks
 ```

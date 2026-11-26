@@ -29,6 +29,10 @@ def build_parser() -> argparse.ArgumentParser:
         p = sub.add_parser(name, help=text)
         p.add_argument("id", type=int, help="task id")
 
+    p_edit = sub.add_parser("edit", help="change a task's title")
+    p_edit.add_argument("id", type=int, help="task id")
+    p_edit.add_argument("title", nargs="+", help="new title")
+
     sub.add_parser("clear", help="delete all completed tasks")
     return parser
 
@@ -56,6 +60,11 @@ def run(args: argparse.Namespace) -> int:
 
     elif args.command in ("done", "undo"):
         task = core.set_done(tasks, args.id, done=args.command == "done")
+        storage.save(tasks)
+        print(f"Updated #{task['id']}: {format_task(task)}")
+
+    elif args.command == "edit":
+        task = core.edit_task(tasks, args.id, " ".join(args.title))
         storage.save(tasks)
         print(f"Updated #{task['id']}: {format_task(task)}")
 
